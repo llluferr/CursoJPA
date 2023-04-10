@@ -27,6 +27,12 @@ public class PedidoDao {
 				.getSingleResult();
 	}
 
+	public Pedido buscarPedidoComCliente(Long id){
+		return em.createQuery("SELECT p FROM Pedido p JOIN FETCH p.cliente WHERE p.id= :id", Pedido.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
+
 	public List<RelatorioDeVendasVo> relatorioDeVendas(){
 		String jpql = "SELECT new br.com.alura.loja.vo.RelatorioDeVendasVo(" +
 				"produto.nome, " +
